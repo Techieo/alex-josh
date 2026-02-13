@@ -202,6 +202,14 @@ button{
   .photo-gallery img{width:80%; height:auto;}
   #loveLoopText{font-size:1.5rem;}
 }
+
+@media(max-width:480px){
+  .hero h1 { font-size:2rem; }
+  .hero p { font-size:1rem; }
+  .photo-gallery img { width:70%; max-width:200px; }
+  .love-letter { padding:5vw; }
+  #loveLoopText { font-size:1.2rem; }
+}
 </style>
 </head>
 
@@ -299,14 +307,13 @@ function sayYes(){
     setTimeout(()=>h.remove(),6000);
   }
 
-  setTimeout(()=>{
+  setTimeout(()=> {
     popup.classList.remove("show");
 
     const yes=document.getElementById("yesContent");
     yes.style.display="block";
     yes.scrollIntoView({behavior:"smooth"});
 
-    // Boost music volume
     const bgMusic = document.getElementById("bgMusic");
     let targetVol = 1;
     let fadeIn = setInterval(() => {
@@ -317,10 +324,8 @@ function sayYes(){
       }
     }, 100);
 
-    // Animate text
     document.getElementById("letterText").classList.add("show");
 
-    // Animate gallery images flying in
     const gallery = document.querySelectorAll("#photoGallery img");
     gallery.forEach((img, idx)=>{
       const startX = (Math.random()*2-1)*1000;
@@ -338,7 +343,6 @@ function sayYes(){
 
     startTyping();
 
-    // Start looping love text after gallery
     setTimeout(startLoveLoop, 4000);
 
   },3000);
@@ -385,8 +389,8 @@ function startLoveLoop(){
             el.textContent += loveMessages[msgIndex][charIndex];
             charIndex++;
             if(charIndex === loveMessages[msgIndex].length){
-                typingForward = false; // start deleting
-                setTimeout(()=>{}, 800); // pause at full text
+                typingForward = false;
+                setTimeout(()=>{}, 800);
             }
         } else {
             el.textContent = el.textContent.slice(0, -1);
